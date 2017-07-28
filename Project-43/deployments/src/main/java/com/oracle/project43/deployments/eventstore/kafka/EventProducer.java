@@ -6,6 +6,7 @@
 package com.oracle.project43.deployments.eventstore.kafka;
 
 import java.util.Properties;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -15,7 +16,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
  *
  * @author RBIRTLES
  */
-public class KafkaProducer {
+public class EventProducer {
+    
     
     private final static String TOPIC = "deployments";   
 
@@ -37,7 +39,7 @@ public class KafkaProducer {
      }
     }
 
-
+    
     private static Producer<String, String> createProducer() {
         
         Properties props = new Properties();
@@ -45,8 +47,9 @@ public class KafkaProducer {
         props.put(ProducerConfig.CLIENT_ID_CONFIG, "DeploymentProducer");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-                
+    
         return new KafkaProducer<>(props);
 
     }
+    
 }
